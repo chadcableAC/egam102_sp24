@@ -8,14 +8,14 @@ public class JumpAnimator : MonoBehaviour
 
     void Update()
     {
+        // Map the "spacebar" to the animator value
         bool isPressed = false;
+
         if (Input.GetKey(KeyCode.Space))
         {
             isPressed = true;
         }
 
         animator.SetBool("IsPressed", isPressed);
-
-        // Adding a comment
     }
 }

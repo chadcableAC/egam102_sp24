@@ -15,6 +15,7 @@ public class ScreenToggler : MonoBehaviour
 
     public ScreenType currentScreen;
 
+    // References to the screen game objects
     public GameObject loseScreen;
     public GameObject winScreen;
     public GameObject readyScreen;
@@ -22,11 +23,13 @@ public class ScreenToggler : MonoBehaviour
 
     void Update()
     {
+        // Turn each screen on / off based on the currentScreen value
         loseScreen.SetActive(currentScreen == ScreenType.Lose);
         winScreen.SetActive(currentScreen == ScreenType.Win);
         readyScreen.SetActive(currentScreen == ScreenType.Ready);
         gameplayScreen.SetActive(currentScreen == ScreenType.Gameplay);
 
+        // State machine updates
         switch (currentScreen)
         {
             case ScreenType.Ready:
@@ -34,7 +37,7 @@ public class ScreenToggler : MonoBehaviour
                 break;
         }
 
-        // If you press space, load 
+        // If you press space, load a new scene
         if (Input.GetKeyDown(KeyCode.Space))
         {
             LoadScene(currentScreen);
@@ -43,6 +46,7 @@ public class ScreenToggler : MonoBehaviour
 
     public void UpdateReady()
     {
+        // If we click, move to the next state / screen
         if (Input.GetMouseButtonDown(0))
         {
             currentScreen++;

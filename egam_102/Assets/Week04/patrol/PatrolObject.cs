@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PatrolObject : MonoBehaviour
 {
+    // General variables
     public Transform moveHandle;
 
     public enum PatrolStates
@@ -32,22 +33,12 @@ public class PatrolObject : MonoBehaviour
 
     private void Start()
     {
+        // Assign a starting value
         patrolTarget = patrolHandleA;
     }
 
     void Update()
     {
-        if (currentState != previousState)
-        {
-            switch (currentState)
-            {
-
-            }
-
-            previousState = currentState;
-        }
-
-
         // Based on teh current state, redierect to that Update loop
         switch (currentState)
         {
@@ -86,11 +77,23 @@ public class PatrolObject : MonoBehaviour
         //{
         //    UpdateRunAway();
         //}
+
+        // This code will detect changes in the current state
+        //if (currentState != previousState)
+        //{
+        //    switch (currentState)
+        //    {
+        //    }
+        //    previousState = currentState;
+        //}
     }
 
     public void SetState(PatrolStates newState)
     {
+        // Assign the value
         currentState = newState;
+
+        // Run logic based on the new state
         switch (currentState)
         {
 
