@@ -15,5 +15,7 @@ public class JumpAnimator : MonoBehaviour
         }
 
         animator.SetBool("IsPressed", isPressed);
+
+        // Adding a comment
     }
 }
