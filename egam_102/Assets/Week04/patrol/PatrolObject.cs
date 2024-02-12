@@ -102,35 +102,38 @@ public class PatrolObject : MonoBehaviour
 
     public void UpdatePatrol()
     {
-        // Move towards this position
-        Vector3 targetPosition = patrolTarget.position;
-
-        // To find the diurection from A to B = B - A
-        Vector3 delta = targetPosition - moveHandle.position;
-        Vector3 moveDirection = delta.normalized;
-
-        moveHandle.position += moveDirection * moveSpeed * Time.deltaTime;
-
-        // If we're REALLY close, change our target
-        if (delta.magnitude < minimumDistance)
+        if (patrolTarget != null)
         {
-            if (patrolTarget == patrolHandleA)
-            {
-                patrolTarget = patrolHandleB;
-            }
-            else
-            {
-                patrolTarget = patrolHandleA;
-            }
-        }
+            // Move towards this position
+            Vector3 targetPosition = patrolTarget.position;
 
-        // Are we close to the enemy?
-        Vector3 enemyPosition = enemyHandle.position;
-        Vector3 enemyDelta = enemyPosition - moveHandle.position;
-        if (enemyDelta.magnitude < minimumEnemyDistance)
-        {
-            // We're really close to the enemy - start chasing!
-            SetState(PatrolStates.Chase);
+            // To find the diurection from A to B = B - A
+            Vector3 delta = targetPosition - moveHandle.position;
+            Vector3 moveDirection = delta.normalized;
+
+            moveHandle.position += moveDirection * moveSpeed * Time.deltaTime;
+
+            // If we're REALLY close, change our target
+            if (delta.magnitude < minimumDistance)
+            {
+                if (patrolTarget == patrolHandleA)
+                {
+                    patrolTarget = patrolHandleB;
+                }
+                else
+                {
+                    patrolTarget = patrolHandleA;
+                }
+            }
+
+            // Are we close to the enemy?
+            Vector3 enemyPosition = enemyHandle.position;
+            Vector3 enemyDelta = enemyPosition - moveHandle.position;
+            if (enemyDelta.magnitude < minimumEnemyDistance)
+            {
+                // We're really close to the enemy - start chasing!
+                SetState(PatrolStates.Chase);
+            }
         }
     }
 
