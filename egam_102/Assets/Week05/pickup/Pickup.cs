@@ -10,11 +10,13 @@ public class Pickup : MonoBehaviour
 
     private void Start()
     {
+        // Remember our starting position
         originalPosition = moveHandle.position;
     }
 
     public void Reset()
     {
+        // Go back to the original position
         moveHandle.position = originalPosition;
     }
 }

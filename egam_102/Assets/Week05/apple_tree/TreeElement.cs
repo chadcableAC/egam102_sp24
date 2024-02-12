@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TreeElement : MonoBehaviour
 {
+    // List of apples (an ARRAY and a LIST)
     public Apple[] appleArray;
-
     public List<Apple> appleList;
 
     void Start()
@@ -27,6 +27,7 @@ public class TreeElement : MonoBehaviour
             apple.Fall();
         }
 
+
         // Using ARRAYS
 
         // FOR EACH
@@ -43,10 +44,5 @@ public class TreeElement : MonoBehaviour
             Apple apple = appleList[i];
             apple.Fall();
         }
-    }
-
-    void Update()
-    {
-        
     }
 }

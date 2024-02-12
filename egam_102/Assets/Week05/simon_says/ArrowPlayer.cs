@@ -43,19 +43,22 @@ public class ArrowPlayer : MonoBehaviour
             exampleDirectionList.Add(direction);
         }
 
+        // Start with everything turned off
         TurnAllOff(exampleArrows);
 
+        // Show each directionb
         foreach (Directions direction in exampleDirectionList)
         {
             SetDirection(exampleArrows, direction);
-
             yield return new WaitForSeconds(1f);
 
+            // Turn off for a small time (That way we can see if a direction
+            // happens twice in a row)
             TurnAllOff(exampleArrows);
-
             yield return new WaitForSeconds(0.2f);
         }
 
+        // Turn everythign off
         TurnAllOff(exampleArrows);
     }
 
@@ -63,6 +66,7 @@ public class ArrowPlayer : MonoBehaviour
     {
         foreach (ArrowElement arrow in arrowList)
         {
+            // Turn on if the directions match
             bool isOn = newDirection == arrow.ourDirection;
             arrow.SetOn(isOn);
         }

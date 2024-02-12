@@ -15,6 +15,21 @@ public class PickupCharacter : MonoBehaviour
 
     void Update()
     {
+        UpdateControls();
+        OrganizePickups();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            DropTop();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DropAll();
+        }
+    }
+
+    void UpdateControls()
+    {
         Vector2 moveDirection = Vector2.zero;
 
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -36,56 +51,57 @@ public class PickupCharacter : MonoBehaviour
 
         if (moveDirection != Vector2.zero)
         {
-            moveHandle.position += (Vector3) moveDirection.normalized * moveSpeed * Time.deltaTime;
-        }
-
-        OrganizePickups();
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            DropTop();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DropAll();
+            moveHandle.position += moveSpeed * Time.deltaTime * (Vector3)moveDirection.normalized;
         }
     }
 
     public void OrganizePickups()
     {
+        // Use this handle as the starting point
         Vector3 originPosition = holdHandle.position;
         for (int i = 0; i < pickupList.Count; i++)
         {
-            Vector3 offset = Vector3.up * holdDistance * i;
+            // Offset per element
+            Vector3 offset = holdDistance * i * Vector3.up;
+
+            // Set at the position
             pickupList[i].moveHandle.position = originPosition + offset;
         }
     }
 
     public void DropTop()
     {
+        // Only remove if there's something in the list (more than 0)
         if (pickupList.Count > 0)
         {
+            // Lists are "zero based", so the last element is "count minus one"
             int lastIndex = pickupList.Count - 1;
             pickupList[lastIndex].Reset();
+
+            // Remember to remove this entry from the list
             pickupList.RemoveAt(lastIndex);
         }
     }
 
     public void DropAll()
     {
+        // Drop everything in the list
         foreach (Pickup pickup in pickupList)
         {
             pickup.Reset();
         }
 
+        // Clear the list
         pickupList.Clear();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Did this collider have a Pickup script on it?
         Pickup pickup = collision.gameObject.GetComponent<Pickup>();
         if (pickup != null)
         {
+            // Don't re-add to the list
             if (pickupList.Contains(pickup) == false)
             {
                 pickupList.Add(pickup);

@@ -8,11 +8,13 @@ public class Apple : MonoBehaviour
 
     void Awake()
     {
+        // Start frozen in air
         rb.simulated = false;
     }
 
     public void Fall()
     {
+        // Reactive gravity
         rb.simulated = true;
     }
 }

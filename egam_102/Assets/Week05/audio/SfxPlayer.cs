@@ -20,12 +20,14 @@ public class SfxPlayer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // Switch the clip and play
             audioSource.clip = sfx1;
             audioSource.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
+            // Switch the clip and play
             audioSource.clip = sfx2;
             audioSource.Play();
         }

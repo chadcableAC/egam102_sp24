@@ -6,14 +6,17 @@ public class MusicPlayer : MonoBehaviour
 {
     void Start()
     {
+        // Find ALL of the music players in the scene
         MusicPlayer[] musicPlayers = FindObjectsOfType<MusicPlayer>();
+
+        // If there's more than one, delete ourselves
         if (musicPlayers.Length > 1)
         {
             Destroy(gameObject);
         }
+        // Otherwise make sure we won't be deletd on reloads
         else
         {
-            // This will keep us in teh game forever, across scene loads and reloads
             DontDestroyOnLoad(gameObject);
         }
     }
