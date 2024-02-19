@@ -94,10 +94,10 @@ public class PatrolObject : MonoBehaviour
         currentState = newState;
 
         // Run logic based on the new state
-        switch (currentState)
-        {
+        //switch (currentState)
+        //{
 
-        }
+        //}
     }
 
     public void UpdatePatrol()
